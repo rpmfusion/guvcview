@@ -1,6 +1,6 @@
 Name:           guvcview
-Version:        1.3.1
-Release:        3%{?dist}
+Version:        1.4.0
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -23,7 +23,7 @@ BuildRequires:  libv4l-devel
 
 %description
 A simple GTK interface for capturing and viewing video from devices
-supported by the linux UVC driver, although it should also work with
+supported by the Linux UVC driver, although it should also work with
 any v4l2 compatible device.
 
 
@@ -68,6 +68,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jun 16 2010 Thomas Moschny <thomas.moschny@gmx.de> - 1.4.0-1
+- Update to 1.4.0.
+
 * Thu Apr 29 2010 Thomas Moschny <thomas.moschny@gmx.de> - 1.3.1-3
 - Desktop file fixes:
   - Don't apply a vendor prefix.
