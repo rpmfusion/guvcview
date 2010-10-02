@@ -1,5 +1,5 @@
 Name:           guvcview
-Version:        1.4.1
+Version:        1.4.2
 Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
@@ -68,6 +68,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Sep 30 2010 Thomas Moschny <thomas.moschny@gmx.de> - 1.4.2-1
+- Update to 1.4.2.
+
 * Wed Jun 30 2010 Thomas Moschny <thomas.moschny@gmx.de> - 1.4.1-1
 - Update to 1.4.1.
 
