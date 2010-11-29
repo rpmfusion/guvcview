@@ -1,5 +1,5 @@
 Name:           guvcview
-Version:        1.4.2
+Version:        1.4.3
 Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
@@ -19,6 +19,7 @@ BuildRequires:  ffmpeg-devel
 BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  libv4l-devel
+BuildRequires:  libudev-devel
 
 
 %description
@@ -68,6 +69,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Nov 29 2010 Thomas Moschny <thomas.moschny@gmx.de> - 1.4.3-1
+- Update to 1.4.3.
+
 * Thu Sep 30 2010 Thomas Moschny <thomas.moschny@gmx.de> - 1.4.2-1
 - Update to 1.4.2.
 
