@@ -1,25 +1,29 @@
 Name:           guvcview
-Version:        1.5.0
+Version:        1.5.1
 Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
 License:        GPLv3+
-URL:            http://guvcview.berlios.de/
-Source0:        http://download.berlios.de/%{name}/%{name}-src-%{version}.tar.gz
+URL:            http://guvcview.sourceforge.net/
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  gtk2-devel
+BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
+BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
+BuildRequires:  pkgconfig(gthread-2.0)
+BuildRequires:  pkgconfig(gdk-3.0) >= 3.0.0
+BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
+BuildRequires:  pkgconfig(sdl) >= 1.2.10
+BuildRequires:  pkgconfig(portaudio-2.0)
+BuildRequires:  pkgconfig(libpng)
+BuildRequires:  pkgconfig(libavcodec)
+BuildRequires:  pkgconfig(libv4l2)
+BuildRequires:  pkgconfig(libudev)
 BuildRequires:  gettext
-BuildRequires:  SDL-devel
-BuildRequires:  libpng-devel
-BuildRequires:  portaudio-devel
-BuildRequires:  ffmpeg-devel
 BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  desktop-file-utils
-BuildRequires:  libv4l-devel
-BuildRequires:  libudev-devel
 
 
 %description
@@ -69,6 +73,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Dec 18 2011 Thomas Moschny <thomas.moschny@gmx.de> - 1.5.1-1
+- Update to 1.5.1.
+- Rewrite build requirements using pkgconfig(...).
+- Update URL and Source tags (project moved to sf.net).
+
 * Sun Sep  4 2011 Thomas Moschny <thomas.moschny@gmx.de> - 1.5.0-1
 - Update to 1.5.0.
 
