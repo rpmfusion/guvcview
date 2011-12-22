@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        1.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -8,6 +8,7 @@ Group:          Amusements/Graphics
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
+Patch0:         guvcview-1.5.1-glib2-2.31.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
@@ -34,6 +35,7 @@ any v4l2 compatible device.
 
 %prep
 %setup -q -n %{name}-src-%{version}
+%patch0 -p1
 find src -type f -exec chmod u=rw,go=r {} \;
 
 
@@ -73,6 +75,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Dec 19 2011 Thomas Moschny <thomas.moschny@gmx.de> - 1.5.1-2
+- Add patch for compiling with glib2 2.31 or later.
+
 * Sun Dec 18 2011 Thomas Moschny <thomas.moschny@gmx.de> - 1.5.1-1
 - Update to 1.5.1.
 - Rewrite build requirements using pkgconfig(...).
