@@ -1,6 +1,6 @@
 Name:           guvcview
-Version:        1.5.1
-Release:        2%{?dist}
+Version:        1.5.3
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -8,18 +8,17 @@ Group:          Amusements/Graphics
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
-Patch0:         guvcview-1.5.1-glib2-2.31.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
-BuildRequires:  pkgconfig(gthread-2.0)
 BuildRequires:  pkgconfig(gdk-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:  pkgconfig(sdl) >= 1.2.10
 BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(libpng)
 BuildRequires:  pkgconfig(libavcodec)
+BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  gettext
@@ -35,7 +34,6 @@ any v4l2 compatible device.
 
 %prep
 %setup -q -n %{name}-src-%{version}
-%patch0 -p1
 find src -type f -exec chmod u=rw,go=r {} \;
 
 
@@ -75,6 +73,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar  5 2012 Thomas Moschny <thomas.moschny@gmx.de> - 1.5.3-1
+- Update to 1.5.3.
+- Remove patch applied upstream.
+- Update build requirements.
+
 * Mon Dec 19 2011 Thomas Moschny <thomas.moschny@gmx.de> - 1.5.1-2
 - Add patch for compiling with glib2 2.31 or later.
 
