@@ -1,13 +1,14 @@
 Name:           guvcview
-Version:        1.5.3
-Release:        3%{?dist}
+Version:        1.6.1
+Release:        0.1.20120714gitd7e9ed30%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
+#Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
+Source0:        guvcview-src-v1.6.0-6-gd7e9ed3.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
@@ -33,15 +34,16 @@ any v4l2 compatible device.
 
 
 %prep
-%setup -q -n %{name}-src-%{version}
+#setup -q -n %{name}-src-%{version}
+%setup -q -c %{name}-src-%{version}
 find src -type f -exec chmod u=rw,go=r {} \;
 
 
 %build
 CPPFLAGS=-I/usr/include/ffmpeg
 export CPPFLAGS
-%configure --enable-pulse --disable-debian-menu
-make %{?_smp_mflags}
+%configure --disable-debian-menu
+make V=1 -k %{?_smp_mflags}
 
 
 %install
@@ -73,6 +75,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jul 16 2012 Thomas Moschny <thomas.moschny@gmx.de> - 1.6.1-0.1.20120714gitd7e9ed30
+- Update to latest git version, for FFmpeg compatibility.
+- Pulseaudio support is enabled per default now.
+- Enable more verbose compile output.
+
 * Wed Jul 11 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.5.3-3
 - Rebuilt for libudev1
 
