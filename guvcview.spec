@@ -23,6 +23,7 @@ BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  gettext
+BuildRequires:  intltool
 BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  desktop-file-utils
 
@@ -79,6 +80,7 @@ rm -rf %{buildroot}
 - Update to latest git version, for FFmpeg compatibility.
 - Pulseaudio support is enabled per default now.
 - Enable more verbose compile output.
+- Add missing BR.
 
 * Wed Jul 11 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.5.3-3
 - Rebuilt for libudev1
