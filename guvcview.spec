@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        1.6.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun May 26 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6.1-4
+- Rebuilt for x264/FFmpeg
+
 * Sun Apr 28 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6.1-3
 - https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
