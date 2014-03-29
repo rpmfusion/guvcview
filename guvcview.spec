@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        1.6.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Mar 29 2014 Sérgio Basto <sergio@serjux.com> - 1.6.1-7
+- Rebuilt for ffmpeg-2.2
+
 * Mon Sep 30 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6.1-6
 - Rebuilt
 
