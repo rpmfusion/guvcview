@@ -19,6 +19,7 @@ BuildRequires:  pkgconfig(libavcodec)
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  gettext
 BuildRequires:  intltool
 BuildRequires:  pulseaudio-libs-devel
