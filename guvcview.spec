@@ -1,6 +1,6 @@
 Name:           guvcview
-Version:        1.6.1
-Release:        4%{?dist}
+Version:        1.7.3
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -8,8 +8,6 @@ Group:          Amusements/Graphics
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(gdk-3.0) >= 3.0.0
@@ -21,6 +19,7 @@ BuildRequires:  pkgconfig(libavcodec)
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  gettext
 BuildRequires:  intltool
 BuildRequires:  pulseaudio-libs-devel
@@ -46,7 +45,6 @@ make V=1 -k %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
 desktop-file-install \
@@ -60,12 +58,7 @@ mv %{buildroot}%{_datadir}/doc/%{name} _doc
 rm _doc/INSTALL
 
 
-%clean
-rm -rf %{buildroot}
-
-
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %doc _doc/*
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
@@ -74,6 +67,18 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jun 14 2014 Thomas Moschny <thomas.moschny@gmx.de> - 1.7.3-1
+- Update to 1.7.3.
+
+* Sat Mar 29 2014 Sérgio Basto <sergio@serjux.com> - 1.6.1-7
+- Rebuilt for ffmpeg-2.2
+
+* Mon Sep 30 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6.1-6
+- Rebuilt
+
+* Thu Aug 15 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6.1-5
+- Rebuilt for FFmpeg 2.0.x
+
 * Sun May 26 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.6.1-4
 - Rebuilt for x264/FFmpeg
 
