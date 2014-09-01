@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        1.7.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -67,6 +67,9 @@ rm _doc/INSTALL
 
 
 %changelog
+* Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 1.7.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Thu Aug 07 2014 Sérgio Basto <sergio@serjux.com> - 1.7.3-2
 - Rebuilt for ffmpeg-2.3
 
