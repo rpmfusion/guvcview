@@ -1,6 +1,6 @@
 Name:           guvcview
-Version:        1.7.3
-Release:        4%{?dist}
+Version:        2.0.1
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -10,20 +10,23 @@ URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
-BuildRequires:  pkgconfig(gdk-3.0) >= 3.0.0
-BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
-BuildRequires:  pkgconfig(sdl) >= 1.2.10
 BuildRequires:  pkgconfig(portaudio-2.0)
+BuildRequires:  pkgconfig(libpulse) >= 0.9.15
 BuildRequires:  pkgconfig(libpng)
 BuildRequires:  pkgconfig(libavcodec)
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libusb-1.0)
+BuildRequires:  pkgconfig(sdl2) >= 2.0
+BuildRequires:  pkgconfig(gsl) >= 1.15
+
 BuildRequires:  gettext
 BuildRequires:  intltool
 BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  desktop-file-utils
+# for validating the appdate file
+BuildRequires:  libappstream-glib
 
 
 %description
@@ -32,16 +35,28 @@ supported by the Linux UVC driver, although it should also work with
 any v4l2 compatible device.
 
 
+%package devel
+Summary:        Development files for %{name}
+Group:          Development/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       pkgconfig
+
+%description devel
+A simple GTK interface for capturing and viewing video from devices
+supported by the Linux UVC driver, although it should also work with
+any v4l2 compatible device.
+
+This package contains development files for %{name}.
+
+
 %prep
 %setup -q -n %{name}-src-%{version}
-find src -type f -exec chmod u=rw,go=r {} \;
+find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
 %build
-CPPFLAGS=-I/usr/include/ffmpeg
-export CPPFLAGS
-%configure --disable-debian-menu
-make V=1 -k %{?_smp_mflags}
+%configure --disable-debian-menu --disable-silent-rules --disable-static
+make -k %{?_smp_mflags}
 
 
 %install
@@ -52,21 +67,55 @@ desktop-file-install \
         --dir %{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%find_lang %{name}
+%find_lang %{name} --all-name
 
 mv %{buildroot}%{_datadir}/doc/%{name} _doc
 rm _doc/INSTALL
+
+# does not validate currently
+appstream-util validate-relax --nonet \
+        %{buildroot}/%{_datadir}/appdata/%{name}.appdata.xml
+
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
+
+
+%post -p /sbin/ldconfig
+
+
+%postun -p /sbin/ldconfig
 
 
 %files -f %{name}.lang
 %doc _doc/*
 %{_bindir}/%{name}
+%{_libdir}/libgviewaudio-1.0.so.*
+%{_libdir}/libgviewencoder-1.0.so.*
+%{_libdir}/libgviewrender-1.0.so.*
+%{_libdir}/libgviewv4l2core-1.0.so.*
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/pixmaps/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/appdata/%{name}.appdata.xml
+
+
+%files devel
+%{_includedir}/%{name}-2
+%{_libdir}/libgviewaudio.so
+%{_libdir}/libgviewencoder.so
+%{_libdir}/libgviewrender.so
+%{_libdir}/libgviewv4l2core.so
+%{_libdir}/pkgconfig/libgviewaudio.pc
+%{_libdir}/pkgconfig/libgviewencoder.pc
+%{_libdir}/pkgconfig/libgviewrender.pc
+%{_libdir}/pkgconfig/libgviewv4l2core.pc
 
 
 %changelog
+* Fri Jun 26 2015 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.1-1
+- Update to 2.0.1.
+- Update build requirements.
+- Create -devel subpackage.
+
 * Sun Oct 19 2014 Sérgio Basto <sergio@serjux.com> - 1.7.3-4
 - Rebuilt for FFmpeg 2.4.3
 
