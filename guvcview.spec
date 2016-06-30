@@ -1,5 +1,5 @@
 Name:           guvcview
-Version:        2.0.1
+Version:        2.0.4
 Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
@@ -8,6 +8,7 @@ Group:          Amusements/Graphics
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
+Patch0:         ffmpeg3.patch
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
@@ -51,6 +52,7 @@ This package contains development files for %{name}.
 
 %prep
 %setup -q -n %{name}-src-%{version}
+%patch0 -p1 -b .ffmpeg3
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
@@ -88,10 +90,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %files -f %{name}.lang
 %doc _doc/*
 %{_bindir}/%{name}
-%{_libdir}/libgviewaudio-1.0.so.*
-%{_libdir}/libgviewencoder-1.0.so.*
-%{_libdir}/libgviewrender-1.0.so.*
-%{_libdir}/libgviewv4l2core-1.0.so.*
+%{_libdir}/libgviewaudio-2.0.so.*
+%{_libdir}/libgviewencoder-2.0.so.*
+%{_libdir}/libgviewrender-2.0.so.*
+%{_libdir}/libgviewv4l2core-2.0.so.*
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/pixmaps/%{name}
 %{_datadir}/applications/%{name}.desktop
@@ -111,6 +113,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jun 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.0.4-1
+- Updated to 2.0.4
+- Fixed build with ffmpeg-3.0.x using a patch from Gentoo
+
 * Fri Jun 26 2015 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.1-1
 - Update to 2.0.1.
 - Update build requirements.
