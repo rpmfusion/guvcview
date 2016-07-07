@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -58,6 +58,8 @@ find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 %build
 %configure --disable-debian-menu --disable-silent-rules --disable-static
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 make -k %{?_smp_mflags}
 
 
@@ -88,7 +90,14 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %files -f %{name}.lang
-%doc _doc/*
+%doc _doc/AUTHORS
+%doc _doc/ChangeLog
+%doc _doc/README.md
+%if 0%{?_licensedir:1}
+%license _doc/COPYING
+%else
+%doc _doc/COPYING
+%endif
 %{_bindir}/%{name}
 %{_libdir}/libgviewaudio-2.0.so.*
 %{_libdir}/libgviewencoder-2.0.so.*
@@ -113,6 +122,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jul  7 2016 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.4-2
+- Remove rpath.
+- Mark COPYING as %%license.
+
 * Thu Jun 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.0.4-1
 - Updated to 2.0.4
 - Fixed build with ffmpeg-3.0.x using a patch from Gentoo
