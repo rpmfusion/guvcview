@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -122,6 +122,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Jul 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.0.4-3
+- Rebuilt for ffmpeg-3.1.1
+
 * Thu Jul  7 2016 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.4-2
 - Remove rpath.
 - Mark COPYING as %%license.
