@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -39,7 +39,7 @@ any v4l2 compatible device.
 %package devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       pkgconfig
 
 %description devel
@@ -122,6 +122,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Fri Sep 09 2016 Sérgio Basto <sergio@serjux.com> - 2.0.4-4
+- Fix Requires on guvcview-devel
+
 * Sat Jul 30 2016 Julian Sikorski <belegdol@fedoraproject.org> - 2.0.4-3
 - Rebuilt for ffmpeg-3.1.1
 
