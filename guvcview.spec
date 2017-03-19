@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.4
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -122,6 +122,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sun Mar 19 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.0.4-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Fri Sep 09 2016 Sérgio Basto <sergio@serjux.com> - 2.0.4-4
 - Fix Requires on guvcview-devel
 
