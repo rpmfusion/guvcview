@@ -1,6 +1,6 @@
 Name:           guvcview
-Version:        2.0.4
-Release:        7%{?dist}
+Version:        2.0.5
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -8,7 +8,7 @@ Group:          Amusements/Graphics
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
-Patch0:         ffmpeg3.patch
+Patch0:         update-to-new-libavcodec-API-with-decoupled-input-ou.patch
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
@@ -40,7 +40,6 @@ any v4l2 compatible device.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       pkgconfig
 
 %description devel
 A simple GTK interface for capturing and viewing video from devices
@@ -52,7 +51,7 @@ This package contains development files for %{name}.
 
 %prep
 %setup -q -n %{name}-src-%{version}
-%patch0 -p1 -b .ffmpeg3
+%patch0 -p1
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
@@ -104,13 +103,13 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_libdir}/libgviewrender-2.0.so.*
 %{_libdir}/libgviewv4l2core-2.0.so.*
 %{_mandir}/man1/%{name}.1*
-%{_datadir}/pixmaps/%{name}
+%{_datadir}/pixmaps/%{name}/
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/appdata/%{name}.appdata.xml
 
 
 %files devel
-%{_includedir}/%{name}-2
+%{_includedir}/%{name}-2/
 %{_libdir}/libgviewaudio.so
 %{_libdir}/libgviewencoder.so
 %{_libdir}/libgviewrender.so
@@ -122,6 +121,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Nov 16 2017 Leigh Scott <leigh123linux@googlemail.com> - 2.0.5-1
+- Updated to 2.0.5
+- Add upstream patch for newer libavcodec
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 2.0.4-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
