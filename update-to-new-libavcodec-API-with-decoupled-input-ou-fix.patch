@@ -1,0 +1,12 @@
+diff -up guvcview-src-2.0.5/gview_v4l2core/frame_decoder.c~ guvcview-src-2.0.5/gview_v4l2core/frame_decoder.c
+--- guvcview-src-2.0.5/gview_v4l2core/frame_decoder.c~	2017-11-22 18:42:19.328936202 +0100
++++ guvcview-src-2.0.5/gview_v4l2core/frame_decoder.c	2017-11-22 18:51:42.366466677 +0100
+@@ -1063,7 +1063,7 @@ int libav_decode(AVCodecContext *avctx,
+ 
+ #else
+ 
+-	return avcodec_decode_video2(dec_ctx, frame, got_picture, pkt);
++	return avcodec_decode_video2(avctx, frame, got_frame, pkt);
+ 
+ #endif
+ }

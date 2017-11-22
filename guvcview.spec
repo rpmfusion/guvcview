@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -9,12 +9,13 @@ License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
 Patch0:         update-to-new-libavcodec-API-with-decoupled-input-ou.patch
+Patch1:         update-to-new-libavcodec-API-with-decoupled-input-ou-fix.patch
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(libpulse) >= 0.9.15
 BuildRequires:  pkgconfig(libpng)
-BuildRequires:  pkgconfig(libavcodec)
+BuildRequires:  pkgconfig(libavcodec) >= 57.16
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
@@ -52,11 +53,12 @@ This package contains development files for %{name}.
 %prep
 %setup -q -n %{name}-src-%{version}
 %patch0 -p1
+%patch1 -p1
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
 %build
-%configure --disable-debian-menu --disable-silent-rules --disable-static
+%configure CC=gcc CXX=g++ --disable-debian-menu --disable-silent-rules --disable-static
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 make -k %{?_smp_mflags}
@@ -121,6 +123,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Nov 22 2017 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.5-2
+- Fix patch for older libavcodec.
+- Force building with gcc/g++ instead of clang.
+
 * Thu Nov 16 2017 Leigh Scott <leigh123linux@googlemail.com> - 2.0.5-1
 - Updated to 2.0.5
 - Add upstream patch for newer libavcodec
