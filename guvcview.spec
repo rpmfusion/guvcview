@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -123,6 +123,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jan 18 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.0.5-3
+- Rebuilt for ffmpeg-3.5 git
+
 * Wed Nov 22 2017 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.5-2
 - Fix patch for older libavcodec.
 - Force building with gcc/g++ instead of clang.
