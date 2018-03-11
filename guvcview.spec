@@ -1,6 +1,12 @@
+%if 0%{?fedora} > 27
+%bcond_without  compat_ffmpeg
+%else
+%bcond_with     compat_ffmpeg
+%endif
+
 Name:           guvcview
 Version:        2.0.5
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
@@ -15,8 +21,11 @@ BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(libpulse) >= 0.9.15
 BuildRequires:  pkgconfig(libpng)
-BuildRequires:  pkgconfig(libavcodec) >= 57.16
-BuildRequires:  pkgconfig(libavutil)
+%if %{with compat_ffmpeg}
+BuildRequires:  compat-ffmpeg28-devel
+%else
+BuildRequires:  ffmpeg-devel
+%endif
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libusb-1.0)
@@ -52,12 +61,15 @@ This package contains development files for %{name}.
 
 %prep
 %setup -q -n %{name}-src-%{version}
-%patch0 -p1
-%patch1 -p1
+#%patch0 -p1
+#%patch1 -p1
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
 %build
+%if %{with compat_ffmpeg}
+export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
+%endif
 %configure CC=gcc CXX=g++ --disable-debian-menu --disable-silent-rules --disable-static
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
@@ -123,6 +135,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sun Mar 11 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.0.5-6
+- Switch to compat-ffmpeg28 for F28
+
 * Thu Mar 08 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 2.0.5-5
 - Rebuilt for new ffmpeg snapshot
 
