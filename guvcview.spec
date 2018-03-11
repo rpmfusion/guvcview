@@ -61,8 +61,10 @@ This package contains development files for %{name}.
 
 %prep
 %setup -q -n %{name}-src-%{version}
-#%patch0 -p1
-#%patch1 -p1
+%if ! %{with compat_ffmpeg}
+%patch0 -p1
+%patch1 -p1
+%endif
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
