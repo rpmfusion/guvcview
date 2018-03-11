@@ -98,10 +98,7 @@ appstream-util validate-relax --nonet \
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
-%post -p /sbin/ldconfig
-
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files -f %{name}.lang
