@@ -5,8 +5,8 @@
 %endif
 
 Name:           guvcview
-Version:        2.0.5
-Release:        7%{?dist}
+Version:        2.0.6
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
@@ -132,6 +132,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Oct 30 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.0.6-1
+- Updated to 2.0.6
+
 * Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.0.5-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
