@@ -116,6 +116,11 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %changelog
 * Tue Oct 30 2018 Leigh Scott <leigh123linux@googlemail.com> - 2.0.6-1
 - Updated to 2.0.6
+- Remove Group tag
+- Use make macros
+- Drop compat-ffmpeg28 changes
+- Drop old patches
+- Add BuildRequires gcc-c++
 
 * Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.0.5-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
