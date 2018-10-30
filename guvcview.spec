@@ -8,7 +8,6 @@ Name:           guvcview
 Version:        2.0.5
 Release:        7%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
-Group:          Amusements/Graphics
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
 License:        GPLv3+
@@ -48,7 +47,6 @@ any v4l2 compatible device.
 
 %package devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
