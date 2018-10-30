@@ -1,9 +1,3 @@
-%if 0%{?fedora} > 27
-%bcond_without  compat_ffmpeg
-%else
-%bcond_with     compat_ffmpeg
-%endif
-
 Name:           guvcview
 Version:        2.0.6
 Release:        1%{?dist}
@@ -20,11 +14,7 @@ BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
 BuildRequires:  pkgconfig(libpulse) >= 0.9.15
 BuildRequires:  pkgconfig(libpng)
-%if %{with compat_ffmpeg}
-BuildRequires:  compat-ffmpeg28-devel
-%else
 BuildRequires:  ffmpeg-devel
-%endif
 BuildRequires:  pkgconfig(libv4l2)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(libusb-1.0)
@@ -59,17 +49,10 @@ This package contains development files for %{name}.
 
 %prep
 %setup -q -n %{name}-src-%{version}
-%if ! %{with compat_ffmpeg}
-%patch0 -p1
-%patch1 -p1
-%endif
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
 %build
-%if %{with compat_ffmpeg}
-export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
-%endif
 %configure CC=gcc CXX=g++ --disable-debian-menu --disable-silent-rules --disable-static
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
