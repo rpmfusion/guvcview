@@ -19,6 +19,7 @@ BuildRequires:  pkgconfig(libusb-1.0)
 BuildRequires:  pkgconfig(sdl2) >= 2.0
 BuildRequires:  pkgconfig(gsl) >= 1.15
 
+BuildRequires:  gcc-c++
 BuildRequires:  gettext
 BuildRequires:  intltool
 BuildRequires:  pulseaudio-libs-devel
