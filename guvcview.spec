@@ -7,8 +7,6 @@ Summary:        GTK+ UVC Viewer and Capturer
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
-Patch0:         update-to-new-libavcodec-API-with-decoupled-input-ou.patch
-Patch1:         update-to-new-libavcodec-API-with-decoupled-input-ou-fix.patch
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
