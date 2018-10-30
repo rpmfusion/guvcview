@@ -73,11 +73,11 @@ export PKG_CONFIG_PATH=%{_libdir}/compat-ffmpeg28/pkgconfig
 %configure CC=gcc CXX=g++ --disable-debian-menu --disable-silent-rules --disable-static
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-make -k %{?_smp_mflags}
+%make_build
 
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 
 desktop-file-install \
         --add-category='X-AudioVideoCapture' \
