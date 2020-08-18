@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.6
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
@@ -114,6 +114,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.0.6-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Sat Feb 22 2020 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 2.0.6-5
 - Rebuild for ffmpeg-4.3 git
 
