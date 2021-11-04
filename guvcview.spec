@@ -1,12 +1,12 @@
 Name:           guvcview
-Version:        2.0.7
+Version:        2.0.7.2
 Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.bz2
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-2.0.7-2.tar.bz2
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
@@ -116,6 +116,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Nov  4 2021 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.7.2-1
+- Update to 2.0.7-2.
+
 * Thu Nov  4 2021 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.7-1
 - Update to 2.0.7.
 
