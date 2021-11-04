@@ -1,12 +1,12 @@
 Name:           guvcview
-Version:        2.0.6
-Release:        9%{?dist}
+Version:        2.0.7
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.gz
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.bz2
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
@@ -24,8 +24,11 @@ BuildRequires:  gettext
 BuildRequires:  intltool
 BuildRequires:  pulseaudio-libs-devel
 BuildRequires:  desktop-file-utils
-# for validating the appdate file
+# for validating the appdata file
 BuildRequires:  libappstream-glib
+
+# for bootstrapping
+Buildrequires:  autoconf automake libtool
 
 
 %description
@@ -47,14 +50,13 @@ This package contains development files for %{name}.
 
 
 %prep
-%setup -q -n %{name}-src-%{version}
+%autosetup -c -n %{name}-src-%{version}
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
 %build
+./bootstrap.sh
 %configure CC=gcc CXX=g++ --disable-debian-menu --disable-silent-rules --disable-static
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 %make_build
 
 
@@ -92,7 +94,7 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %endif
 %{_bindir}/%{name}
 %{_libdir}/libgviewaudio-2.0.so.*
-%{_libdir}/libgviewencoder-2.0.so.*
+%{_libdir}/libgviewencoder-2.1.so.*
 %{_libdir}/libgviewrender-2.0.so.*
 %{_libdir}/libgviewv4l2core-2.0.so.*
 %{_mandir}/man1/%{name}.1*
@@ -114,6 +116,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Nov  4 2021 Thomas Moschny <thomas.moschny@gmx.de> - 2.0.7-1
+- Update to 2.0.7.
+
 * Mon Aug 02 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.0.6-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
