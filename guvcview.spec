@@ -7,6 +7,7 @@ Summary:        GTK+ UVC Viewer and Capturer
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-2.0.7-2.tar.bz2
+Patch0:         https://raw.githubusercontent.com/archlinux/svntogit-community/packages/guvcview/trunk/ffmpeg5.patch
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
@@ -50,7 +51,7 @@ This package contains development files for %{name}.
 
 
 %prep
-%autosetup -c -n %{name}-src-%{version}
+%autosetup -p1 -c -n %{name}-src-%{version}
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
