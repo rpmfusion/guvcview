@@ -1,13 +1,12 @@
 Name:           guvcview
-Version:        2.0.7.2
-Release:        2%{?dist}
+Version:        2.0.8
+Release:        1%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
 License:        GPLv3+
 URL:            http://guvcview.sourceforge.net/
-Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-2.0.7-2.tar.bz2
-Patch0:         https://raw.githubusercontent.com/archlinux/svntogit-community/packages/guvcview/trunk/ffmpeg5.patch
+Source0:        http://downloads.sourceforge.net/%{name}/%{name}-src-%{version}.tar.bz2
 BuildRequires:  pkgconfig(gtk+-3.0) >= 3.0.0
 BuildRequires:  pkgconfig(glib-2.0) >= 2.10.0
 BuildRequires:  pkgconfig(portaudio-2.0)
@@ -51,7 +50,7 @@ This package contains development files for %{name}.
 
 
 %prep
-%autosetup -p1 -c -n %{name}-src-%{version}
+%autosetup -p1 -n %{name}-src-%{version}
 find . \( -name '*.h' -o -name '*.c' \) -exec chmod -x {} \;
 
 
@@ -76,7 +75,7 @@ rm _doc/INSTALL
 
 # does not validate currently
 appstream-util validate-relax --nonet \
-        %{buildroot}/%{_datadir}/appdata/%{name}.appdata.xml
+        %{buildroot}/%{_metainfodir}/%{name}.appdata.xml
 
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
@@ -96,12 +95,12 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_bindir}/%{name}
 %{_libdir}/libgviewaudio-2.0.so.*
 %{_libdir}/libgviewencoder-2.1.so.*
-%{_libdir}/libgviewrender-2.0.so.*
-%{_libdir}/libgviewv4l2core-2.0.so.*
+%{_libdir}/libgviewrender-2.1.so.*
+%{_libdir}/libgviewv4l2core-2.1.so.*
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/pixmaps/%{name}/
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/appdata/%{name}.appdata.xml
+%{_metainfodir}/%{name}.appdata.xml
 
 
 %files devel
@@ -117,6 +116,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Apr 30 2022 Leigh Scott <leigh123linux@gmail.com> - 2.0.8-1
+- Update to 2.0.8
+
 * Thu Nov 11 2021 Leigh Scott <leigh123linux@gmail.com> - 2.0.7.2-2
 - Rebuilt for new ffmpeg snapshot
 
