@@ -1,6 +1,6 @@
 Name:           guvcview
 Version:        2.0.8
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GTK+ UVC Viewer and Capturer
 # fixme: ask upstream about license, many source files claim to be
 # under GPLv2+
@@ -116,6 +116,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Mar 01 2023 Leigh Scott <leigh123linux@gmail.com> - 2.0.8-4
+- Rebuild for new ffmpeg
+
 * Wed Feb 08 2023 Leigh Scott <leigh123linux@gmail.com> - 2.0.8-3
 - rebuilt
 
